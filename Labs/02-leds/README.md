@@ -59,26 +59,89 @@ See [schematic of Arduino Uno board](../../Docs/arduino_shield.pdf) in docs fold
 | :-: | :-: | :-- |
 | A | x | Microcontroller ATmega328P does not contain port A |
 | B | 0 | Yes (Arduino pin 8) |
-|   | 1 |  |
-|   | 2 |  |
-|   | 3 |  |
-|   | 4 |  |
-|   | 5 |  |
-|   | 6 |  |
-|   | 7 |  |
+|   | 1 | Yes (Arduino pin ~9) |
+|   | 2 | Yes (Arduino pin ~10) |
+|   | 3 | Yes (Arduino pin ~11) |
+|   | 4 | Yes (Arduino pin 12) |
+|   | 5 | Yes (Arduino pin 13) |
+|   | 6 | NC |
+|   | 7 | NC |
 | C | 0 | Yes (Arduino pin A0) |
-|   | 1 |  |
-|   | 2 |  |
-|   | 3 |  |
-|   | 4 |  |
-|   | 5 |  |
-|   | 6 |  |
-|   | 7 |  |
+|   | 1 | Yes (Arduino pin A1) |
+|   | 2 | Yes (Arduino pin A2) |
+|   | 3 | Yes (Arduino pin A3) |
+|   | 4 | Yes (Arduino pin A4 + SDA) |
+|   | 5 | Yes (Arduino pin A5 + SCL) |
+|   | 6 | NC |
+|   | 7 | NC |
 | D | 0 | Yes (Arduino pin RX<-0) |
-|   | 1 |  |
-|   | 2 |  |
-|   | 3 |  |
-|   | 4 |  |
-|   | 5 |  |
-|   | 6 |  |
-|   | 7 |  |
+|   | 1 | Yes (Arduino pin RX->0) |
+|   | 2 | Yes (Arduino pin 2) |
+|   | 3 | Yes (Arduino pin ~3) |
+|   | 4 | Yes (Arduino pin 4) |
+|   | 5 | Yes (Arduino pin ~5) |
+|   | 6 | Yes (Arduino pin ~6) |
+|   | 7 | Yes (Arduino pin 8) |
+
+Code:
+```c
+	int main(void)
+{
+    //input output setup
+    PORTB = PORTB & ~(1<<LED_INT);
+    DDRB = DDRB | (1<<LED_INT);
+    
+    PORTC = PORTC | (1<<LED_EXT);
+    DDRC = DDRC | (1<<LED_EXT);
+
+    PORTB = PORTB ^ (1<<LED_INT);
+
+    // Infinite loop
+    while (1)
+    {
+            _delay_ms(SHORT_DELAY);
+            PORTB = PORTB ^ (1<<LED_INT);
+            PORTC = PORTC ^ (1<<LED_EXT);
+    }
+    return 0;
+}
+```
+
+## Part 3: Push button
+Use code from previous part and program an application that toggles LEDs only if push button is pressed. Otherwise, the value of the LEDs does not change. 
+
+Configure the pin to which the push button is connected as an input and enable the internal pull-up resistor.
+
+Code:
+```c
+int main(void)
+{
+    //input output setup
+    PORTB = PORTB & ~(1<<LED_INT);
+    DDRB = DDRB | (1<<LED_INT);
+    
+    PORTC = PORTC | (1<<LED_EXT);
+    DDRC = DDRC | (1<<LED_EXT);
+    
+    PORTC = PORTC | (1<<LED_EXT);
+    DDRC = DDRC & ~(1<<LED_EXT);
+    
+    
+    PORTB = PORTB ^ (1<<LED_INT);
+
+    // Infinite loop
+    while (1)
+    {
+        if (bit_is_clear(PINC, 0 )
+        {
+            _delay_ms(SHORT_DELAY);
+            PORTB = PORTB ^ (1<<LED_INT);
+            PORTC = PORTC ^ (1<<LED_EXT);
+        }
+    }
+    return 0;
+}
+```
+## Experiments on your own
+1. Connect at least five LEDs and a push button to the microcontroller, modify `02-leds` code, and program an application in Knight Rider style.
+![knight_rider](https://github.com/Ledvuk/Digital-electronics-2/blob/main/Labs/02-leds/knight_rider.png)

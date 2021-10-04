@@ -28,7 +28,7 @@ int main(void)
     // Infinite loop
     while (1)
     {
-        if (PINC & (1<< BUTTON))
+        if (bit_is_clear(PINC, 0 )
         {
             _delay_ms(SHORT_DELAY);
             PORTB = PORTB ^ (1<<LED_INT);
