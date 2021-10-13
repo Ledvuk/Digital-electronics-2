@@ -48,7 +48,7 @@ int main(void)
     // Infinite loop
     while (1)
     {
-        if(GPIO_read(&DDRD, P_BUTTON)==0)
+        while(GPIO_read(&DDRD, P_BUTTON)==0)
         {
             GPIO_toggle(&DDRB, LED_GREEN);
             GPIO_toggle(&DDRC, LED_EXT);
