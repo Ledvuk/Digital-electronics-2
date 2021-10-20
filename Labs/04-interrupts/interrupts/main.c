@@ -15,6 +15,7 @@
 #define LED_D2  PB4
 #define LED_D3  PB3
 #define LED_D4  PB2
+#define BTN_S3  PC3
 
 /* Includes ----------------------------------------------------------*/
 #include <avr/io.h>         // AVR device-specific IO definitions
@@ -46,14 +47,16 @@ int main(void)
     TIM1_overflow_262ms();
     TIM1_overflow_interrupt_enable();
 
+     //Config push putton at port C
+     GPIO_config_input_nopull(&DDRC,BTN_S3);
+     
     // Enables interrupts by setting the global interrupt mask
     sei();
 
     // Infinite loop
     while (1)
     {
-        /* Empty loop. All subsequent operations are performed exclusively 
-         * inside interrupt service routines ISRs */
+       
     }
 
     // Will never reach this
@@ -67,7 +70,8 @@ int main(void)
  **********************************************************************/
 ISR(TIMER1_OVF_vect)
 {
-   static uint8_t i = 0;
+    
+static uint8_t i = 0;
    static uint8_t ctud = 0;
    static ledAdress[] = {LED_D1, LED_D2, LED_D3, LED_D4};
    
@@ -75,14 +79,20 @@ ISR(TIMER1_OVF_vect)
        GPIO_toggle(&PORTB, ledAdress[i]);
        GPIO_toggle(&PORTB, ledAdress[i-1]);
        i++;
-       if(i>3){ctud=1;}
+       if(i==4){
+           ctud=1;
+       }
    }     
    
    if(i>=0 && ctud==1){
        GPIO_toggle(&PORTB, ledAdress[i]);
        GPIO_toggle(&PORTB, ledAdress[i-1]);
        i--;
-       if(i<1){ctud=0;}
+       if(i==0){
+           ctud=0;
+           GPIO_toggle(&PORTB, ledAdress[i]);
+           }
    }
+   
        
 }
