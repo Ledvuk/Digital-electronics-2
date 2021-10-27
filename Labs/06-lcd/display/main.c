@@ -25,13 +25,28 @@
  **********************************************************************/
 int main(void)
 {
-    // Initialize LCD display
+    // Initialize LCD display   
     lcd_init(LCD_DISP_ON);
 
     // Put string(s) at LCD display
     lcd_gotoxy(1, 0);
-    lcd_puts("LCD Test");
-    lcd_putc('!');
+    lcd_puts("00:");
+    
+    lcd_gotoxy(6, 0);
+    lcd_puts(".");
+    
+    lcd_gotoxy(11, 0);
+    lcd_putc('a');
+    
+    lcd_gotoxy(1, 1);
+    lcd_putc('b');
+    
+    lcd_gotoxy(11, 1);
+    lcd_putc('c');
+    
+    TIM2_overflow_16ms();
+    TIM2_overflow_interrupt_enable();
+    
 
     // Configure 8-bit Timer/Counter2 for Stopwatch
     // Set the overflow prescaler to 16 ms and enable interrupt
@@ -60,15 +75,31 @@ int main(void)
 ISR(TIMER2_OVF_vect)
 {
     static uint8_t number_of_overflows = 0;
-
+    static uint8_t seconds=0;
+    static uint8_t decimals=0;
+    char decstr[2];
+    char secstr[1];
+    
+    
     number_of_overflows++;
     if (number_of_overflows >= 6)
     {
         // Do this every 6 x 16 ms = 100 ms
         number_of_overflows = 0;
-
-        // WRITE YOUR CODE HERE
-
+        decimals ++;
+        if(decimals>=10){
+            decimals=0;
+            seconds++;
+        }
+        
+        itoa(decimals, decstr, 10);
+        itoa(seconds, secstr, 10);
+        
+        lcd_gotoxy(4, 0);
+        lcd_puts(secstr);
+        
+        lcd_gotoxy(7, 0);
+        lcd_puts(decstr);
     }
     // Else do nothing and exit the ISR
 }
