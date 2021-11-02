@@ -2,17 +2,17 @@
 
 Link to your `Digital-electronics-2` GitHub repository:
 
-[https://github.com/your-github-account/repository-name/lab_name](https://github.com/...)
+Link to my github: https://github.com/Ledvuk/Digital-electronics-2/
 
 
 ### LCD display module
 
 1. In your words, describe what ASCII table is.
-   * ASCII
+   * ASCII je tabuľka znakov čísel a písmen anglickej abecedy indexovaná číslami.
 
 2. (Hand-drawn) picture of time signals between ATmega328P and LCD keypad shield (HD44780 driver) when transmitting three character data `De2`.
 
-   ![your figure]()
+    ![one](https://github.com/Ledvuk/Digital-electronics-2/blob/main/Labs/06-lcd/timing.png)
 
 
 ### Stopwatch
@@ -30,8 +30,24 @@ Link to your `Digital-electronics-2` GitHub repository:
 /* Variables ---------------------------------------------------------*/
 // Custom character definition
 uint8_t customChar[16] = {
-    // WRITE YOUR CODE HERE
-
+        0b10101,
+	0b01010,
+	0b10101,
+	0b01010,
+	0b10101,
+	0b01010,
+	0b10101,
+	0b01010
+};
+uint8_t customChar[16] = {
+        0b00000,
+	0b00100,
+	0b01110,
+	0b11111,
+	0b01110,
+	0b01110,
+	0b01110,
+	0b00000
 };
 ```
 
@@ -42,4 +58,4 @@ Consider a kitchen alarm with an LCD, one LED and three push buttons: start, +1 
 
 1. Scheme of kitchen alarm; do not forget the supply voltage. The image can be drawn on a computer or by hand. Always name all components and their values.
 
-   ![your figure]()
+  ![Kitchen](https://github.com/Ledvuk/Digital-electronics-2/blob/main/Labs/06-lcd/kitchen.png)
