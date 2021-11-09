@@ -65,4 +65,4 @@ Consider an application for temperature measurement and display. Use temperature
 
 1. Scheme of temperature meter. The image can be drawn on a computer or by hand. Always name all components and their values.
 
-   ![hento](https://github.com/Ledvuk/Digital-electronics-2/blob/main/Labs/07-uart/tempc.png)
+   ![hento](https://github.com/Ledvuk/Digital-electronics-2/blob/main/Labs/07-uart/DE2_CV.png)
