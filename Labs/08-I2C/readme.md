@@ -14,7 +14,7 @@ Link to this file in your GitHub repository:
    * SPI pins
    * external interrupt pins INT0, INT1
 
-    ![Traffic](https://github.com/Ledvuk/Digital-electronics-2/blob/main/Labs/08-i2c/arduino.jpg)
+    ![Traffic](https://github.com/Ledvuk/Digital-electronics-2/blob/main/Labs/08-I2C/arduino.jpg)
 ### I2C
 
 1. Code listing of Timer1 overflow interrupt service routine for scanning I2C devices and rendering a clear table on the UART. Always use syntax highlighting and meaningful comments:
@@ -89,7 +89,7 @@ ISR(TIMER1_OVF_vect)
 
 2. (Hand-drawn) picture of I2C signals when reading checksum (only 1 byte) from DHT12 sensor. Indicate which specific moments control the data line master and which slave.
 
-    ![Traffic](https://github.com/Ledvuk/Digital-electronics-2/blob/main/Labs/08-i2c/timing.jpg)
+    ![Traffic](https://github.com/Ledvuk/Digital-electronics-2/blob/main/Labs/08-I2C/timing.jpg)
 
 ### Meteo station
 
@@ -97,4 +97,4 @@ Consider an application for temperature and humidity measurement and display. Us
 
 1. FSM state diagram picture of meteo station. The image can be drawn on a computer or by hand. Concise name of individual states and describe the transitions between them.
 
-    ![Traffic](https://github.com/Ledvuk/Digital-electronics-2/blob/main/Labs/08-i2c/flow.jpg)
+    ![Traffic](https://github.com/Ledvuk/Digital-electronics-2/blob/main/Labs/08-I2C/flow.jpg)
